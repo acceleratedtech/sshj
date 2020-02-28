@@ -62,6 +62,10 @@ public class SecurityUtils {
     private static boolean registrationDone;
 
     public static boolean registerSecurityProvider(String providerClassName) {
+        LOG.info("skipping security provider " + providerClassName);
+        if (providerClassName != null)
+            return false;
+
         Provider provider = null;
         try {
             Class<?> name = Class.forName(providerClassName);
@@ -257,8 +261,9 @@ public class SecurityUtils {
      * @param securityProvider identifier for the security provider
      */
     public static synchronized void setSecurityProvider(String securityProvider) {
-        SecurityUtils.securityProvider = securityProvider;
-        registrationDone = false;
+        LOG.info("Skipping security provider " + securityProvider);
+        //SecurityUtils.securityProvider = securityProvider;
+        //registrationDone = false;
     }
 
     private static void register() {

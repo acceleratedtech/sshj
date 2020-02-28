@@ -27,9 +27,11 @@ import net.schmizz.sshj.transport.verification.AlgorithmsVerifier;
 import net.schmizz.sshj.transport.verification.HostKeyVerifier;
 import org.slf4j.Logger;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -598,7 +600,11 @@ public final class TransportImpl
         try {
             if (!close.isSet()) {
 
-                log.error("Dying because - {}", ex.getMessage(), ex);
+                log.error("Dying because - {} {}", ex.getMessage(), ex);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                PrintStream s = new PrintStream(baos);
+                ex.printStackTrace(s);
+                log.error(baos.toString());
 
                 final SSHException causeOfDeath = SSHException.chainer.chain(ex);
 

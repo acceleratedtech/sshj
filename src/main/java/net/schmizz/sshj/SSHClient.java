@@ -48,10 +48,10 @@ import net.schmizz.sshj.userauth.password.PasswordUpdateProvider;
 import net.schmizz.sshj.userauth.password.PasswordUtils;
 import net.schmizz.sshj.userauth.password.Resource;
 import net.schmizz.sshj.xfer.scp.SCPFileTransfer;
-import org.ietf.jgss.Oid;
+//import org.ietf.jgss.Oid;
 import org.slf4j.Logger;
 
-import javax.security.auth.login.LoginContext;
+//import javax.security.auth.login.LoginContext;
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
@@ -390,29 +390,29 @@ public class SSHClient
         authPublickey(username, keyProviders);
     }
 
-    /**
-     * Authenticate {@code username} using the {@code "gssapi-with-mic"} authentication method, given a login context
-     * for the peer GSS machine and a list of supported OIDs.
-     * <p/>
-     * Supported OIDs should be ordered by preference as the SSH server will choose the first OID that it also
-     * supports. At least one OID is required
-     *
-     * @param username      user to authenticate
-     * @param context       {@code LoginContext} for the peer GSS machine
-     * @param supportedOid  first supported OID
-     * @param supportedOids other supported OIDs
-     *
-     * @throws UserAuthException  in case of authentication failure
-     * @throws TransportException if there was a transport-layer error
-     */
-    public void authGssApiWithMic(String username, LoginContext context, Oid supportedOid, Oid... supportedOids)
-            throws UserAuthException, TransportException {
-        // insert supportedOid to the front of the list since ordering matters
-        List<Oid> oids = new ArrayList<Oid>(Arrays.asList(supportedOids));
-        oids.add(0, supportedOid);
-
-        auth(username, new AuthGssApiWithMic(context, oids));
-    }
+//    /**
+//     * Authenticate {@code username} using the {@code "gssapi-with-mic"} authentication method, given a login context
+//     * for the peer GSS machine and a list of supported OIDs.
+//     * <p/>
+//     * Supported OIDs should be ordered by preference as the SSH server will choose the first OID that it also
+//     * supports. At least one OID is required
+//     *
+//     * @param username      user to authenticate
+//     * @param context       {@code LoginContext} for the peer GSS machine
+//     * @param supportedOid  first supported OID
+//     * @param supportedOids other supported OIDs
+//     *
+//     * @throws UserAuthException  in case of authentication failure
+//     * @throws TransportException if there was a transport-layer error
+//     */
+//    public void authGssApiWithMic(String username, LoginContext context, Oid supportedOid, Oid... supportedOids)
+//            throws UserAuthException, TransportException {
+//        // insert supportedOid to the front of the list since ordering matters
+//        List<Oid> oids = new ArrayList<Oid>(Arrays.asList(supportedOids));
+//        oids.add(0, supportedOid);
+//
+//        auth(username, new AuthGssApiWithMic(context, oids));
+//    }
 
     /**
      * Disconnects from the connected SSH server. {@code SSHClient} objects are not reusable therefore it is incorrect
